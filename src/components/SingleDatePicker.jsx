@@ -428,6 +428,9 @@ export default class SingleDatePicker extends React.Component {
   }
 
   getDateString(date) {
+    if (isSameDay(this.today, date)) {
+      return 'Today';
+    }
     const displayFormat = this.getDisplayFormat();
     if (date && displayFormat) {
       return date && date.format(displayFormat);
