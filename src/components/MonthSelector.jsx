@@ -42,7 +42,7 @@ export default class MonthSelector extends React.Component {
     const className = cx('MonthSelector');
     const selectableYears = [];
     const currentYear = month.get('year');
-    for (let i = 50; i >= 1; i -= 1) {
+    for (let i = 5; i >= 1; i -= 1) {
       selectableYears.push(currentYear - i);
     }
     selectableYears.push(currentYear);
