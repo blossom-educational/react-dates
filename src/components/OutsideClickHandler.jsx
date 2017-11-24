@@ -29,10 +29,17 @@ export default class OutsideClickHandler extends React.Component {
       this.onOutsideClick,
       { capture: true },
     );
+    this.touchstartHandle = addEventListener(
+      document,
+      'touchstart',
+      this.onOutsideClick,
+      { capture: true },
+    );
   }
 
   componentWillUnmount() {
     if (this.clickHandle) removeEventListener(this.clickHandle);
+    if (this.touchstartHandle) removeEventListener(this.touchstartHandle);
   }
 
   onOutsideClick(e) {
