@@ -23,12 +23,7 @@ export default class OutsideClickHandler extends React.Component {
   componentDidMount() {
     // `capture` flag is set to true so that a `stopPropagation` in the children
     // will not prevent all outside click handlers from firing - maja
-    this.clickHandle = addEventListener(
-      document,
-      'click',
-      this.onOutsideClick,
-      { capture: true },
-    );
+    this.clickHandle = addEventListener(document, 'click', this.onOutsideClick, { capture: true });
   }
 
   componentWillUnmount() {
@@ -36,15 +31,22 @@ export default class OutsideClickHandler extends React.Component {
   }
 
   onOutsideClick(e) {
-    const isDescendantOfRoot = this.childNode.contains(e.target);
-    if (!isDescendantOfRoot) {
-      this.props.onOutsideClick(e);
+    if (this.childNode) {
+      const isDescendantOfRoot = this.childNode.contains(e.target);
+
+      if (!isDescendantOfRoot) {
+        this.props.onOutsideClick(e);
+      }
     }
   }
 
   render() {
     return (
-      <div ref={(ref) => { this.childNode = ref; }}>
+      <div
+        ref={(ref) => {
+          this.childNode = ref;
+        }}
+      >
         {this.props.children}
       </div>
     );
